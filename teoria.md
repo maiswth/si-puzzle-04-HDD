@@ -1,12 +1,15 @@
-# Teoría · Pieza NN: Nombre de la pieza
+# Teoría · Pieza 04: HDD
 
-**Grupo:** Nombre Apellido · Nombre Apellido
+**Grupo:** Maisara Aldana · Morena Macias
 
 > Máximo 1 folio por las dos caras. Es lo que estudiará toda la clase para el test: claro, exacto y sin relleno.
 
 ## Conceptos clave
 
-- **Concepto:** definición breve.
+### 1. Qué es un HDD
+- **Definición:** un disco duro (*Hard Disc Drive*, HDD) es un dispositivo de almacenamiento secundario **no volátil** que graba datos magnéticamente en **platos giratorios**; un brazo con cabezales lee y escribe.
+#### ¿Por qué sigue vigente?
+- El SSD sigue gana en latencia e IOPS, pero el HDD gana en **capacidad y coste por TB** 
 
 ## Tabla resumen
 
