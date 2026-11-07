@@ -2,14 +2,30 @@
 
 **Grupo:** Maisara Aldana · Morena Macias
 
-> Máximo 1 folio por las dos caras. Es lo que estudiará toda la clase para el test: claro, exacto y sin relleno.
-
 ## Conceptos clave
 
 ### 1. Qué es un HDD
-- **Definición:** un disco duro (*Hard Disc Drive*, HDD) es un dispositivo de almacenamiento secundario **no volátil** que graba datos magnéticamente en **platos giratorios**; un brazo con cabezales lee y escribe.
+- **Definición:** un disco duro (*Hard Disc Drive*, HDD) es un dispositivo de almacenamiento secundario **no volátil** que graba datos magnéticamente en **platos giratorios**; un brazo con cabezales lee y escribe la información.
 #### ¿Por qué sigue vigente?
-- El SSD sigue gana en latencia e IOPS, pero el HDD gana en **capacidad y coste por TB** 
+Los SSD siguen ganando en latencia e IOPS, pero el HDD gana en **capacidad y coste por TB**.
+#### Evolución de los HDD: como consiguieron almacenar cada vez más información
+El principal objetivo de su evolución ha sido **aumentar la densidad de almacenamiento**, es decir almacenar más información en la misma superficie física.
+
+### 2. Jerarquía de memoria y E/S
+- **Definición:** la jerarquía de memoria es la forma en que se organizan los diferentes tipos de memoria de un ordenador según su velocidad, capacidad y coste. Las memorias más rápidas utilizan tecnologías más costosas y necesitan estar muy cerca del procesador.
+##### ¿Como se organiza?
+| Nivel | Tipo de memoria | Función |
+|---|---|---|
+| 1 | Registros | Guardan datos que utiliza directamente la CPU |
+| 2 | Caché L1 | Almacena datos de acceso muy frecuente |
+| 3 | Caché L2 | Almacena más datos que L1 pero es algo más lenta |
+| 4 | Caché L3 | Caché de mayor capacidad, compartida normalmente entre núcleos |
+| 5 | RAM | Guarda programas y datos que se están utilizando |
+| 6 | SSD | Almacenamiento permanente rápido |
+| 7 | HDD | Almacenamiento permanente de gran capacidad |
+
+- **Latencia:** es el tiempo que transcurre desde que se solicita un dato hasta que comienza a estar disponible.
+
 
 ## Tabla resumen
 
