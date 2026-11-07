@@ -15,7 +15,7 @@ Los SSD siguen ganando en latencia e IOPS, pero el HDD gana en **capacidad y cos
 El principal objetivo de su evolución ha sido **aumentar la densidad de almacenamiento**, es decir almacenar más información en la misma superficie física.
 
 #### Jerarquía de memoria y E/S
-- **Definición:** es la forma en que se organizan los diferentes tipos de memoria de un ordenador según su velocidad, capacidad y coste. Las memorias más rapidas utilizan tecnologías más costosas y necesitan estar muy cerca del procesador. **Cada nivel es caché del inferior**.
+- **Definición:** es la forma en que se organizan los diferentes tipos de memoria de un ordenador según su velocidad, capacidad y coste. Las memorias más rápidas utilizan tecnologías más costosas y necesitan estar muy cerca del procesador. **Cada nivel es caché del inferior**.
 
 #### ¿Cómo se organiza?
 | Nivel | Tipo de memoria | Función |
@@ -32,19 +32,19 @@ El principal objetivo de su evolución ha sido **aumentar la densidad de almacen
 
 ### 2. Componentes su funcionamiento y RPM
 
-- **Los platos:** Son los discos circulares que encontramos dentro del HDD. Se encargan de almacenar los datos mediante magnetismo. Pueden utilizarse ambas caras.
-- **Cabezales de lectura y escritura:** Son unos componentes diminutos que se encargan de leer y escribir los datos en los platos.
-* *Escritura:* el cabezal modifica la orientación magnética de pequeñas regiones del plato para representar los datos.
-* *Lectura:* detecta las variaciones magnéticas de esas regiones. Se utilizan tecnologías como:
-+ **GMR:** permite detectar campos magnéticos mediante cambios en la resistencia eléctrica.
-- **Brazo actuador:** Desplaza los cabezales hasta la pista donde se encuentran los datos.
-- **Motor del eje (spindle):** Hace girar los platos a una velocidad constante.
+- **Los platos:** son los discos circulares que encontramos dentro del HDD. Se encargan de almacenar los datos mediante magnetismo. Pueden utilizarse ambas caras.
+- **Cabezales de lectura y escritura:** son unos componentes diminutos que se encargan de leer y escribir los datos en los platos.
+    - *Escritura:* el cabezal modifica la orientación magnética de pequeñas regiones del plato para representar los datos.
+    - *Lectura:* detecta las variaciones magnéticas de esas regiones. Se utilizan tecnologías como:
+        - **GMR:** permite detectar campos magnéticos mediante cambios en la resistencia eléctrica.
+- **Brazo actuador:** desplaza los cabezales hasta la pista donde se encuentran los datos.
+- **Motor del eje (spindle):** hace girar los platos a una velocidad constante.
 
 #### RPM (Revolutions Per Minute)
 Indica cuantas vueltas completas realizan los platos de un disco duro en un minuto, las velocidades habituales son 5400 y 7200RPM. A mayor RPM, menor latencia rotacional, quiere decir que cuanto más rápido giran los platos, menos tiempo tenemos que esperar a que el sector deseado pase por debajo del cabezal. 
 
-- **Ventajas:** Al reducirse el tiempo de espera, generalmente se mejora el rendimiento (+ operaciones - tiempo). 
-- **Desventajas:** Mayor RPM también significa que el motor tiene que girar los platos a mayor velocidad y eso produce ruido, calor y un mayor consumo de energía.
+- **Ventajas:** al reducirse el tiempo de espera, generalmente se mejora el rendimiento (+ operaciones - tiempo). 
+- **Desventajas:** mayor RPM también significa que el motor tiene que girar los platos a mayor velocidad y eso produce ruido, calor y un mayor consumo de energía.
 
 ---
 
@@ -87,16 +87,16 @@ Los platos de un HDD son discos circulares recubiertos de material magnético. E
 
 #### 5.1. CMR (Conventional Magnetic Recording)
 En CMR, las pistas se escriben **una al lado de la otra, sin solaparse**. Si quieres modificar los datos de la pista B, puedes hacerlo sin tener que modificar las pistas A y C.
-- **Ventaja:** Escrituras constantes y predecibles.
+- **Ventaja:** escrituras constantes y predecibles.
 
 #### 5.2. SMR (Shingled Magnetic Recording)
 En SMR, las pistas se escriben **solapándose parcialmente**. De esta manera aprovechan mejor la superficie del plato y almacenan más información en el mismo espacio.
 
-- **Inconveniente:** Modificar los datos puede requerir trabajo adicional porque unas pistas se solapan con otras. Si queremos modificar los datos de B, podríamos sobreescribir parte de C, pero no queremos perder los datos de C así que el disco tiene que guardar temporalmente los datos que necesita conservar, reescribir la información modificada, reorganizar y volver a escribir los datos afectados.
+- **Inconveniente:** modificar los datos puede requerir trabajo adicional porque unas pistas se solapan con otras. Si queremos modificar los datos de B, podríamos sobreescribir parte de C, pero no queremos perder los datos de C así que el disco tiene que guardar temporalmente los datos que necesita conservar, reescribir la información modificada, reorganizar y volver a escribir los datos afectados.
 
 Aquí entran las escrituras *secuenciales* o *aleatorias*.
-* *Secuenciales:* los datos se escriben siguiendo un orden. Esto facilita que SMR vaya colocando la información de forma consecutiva, evitando muchas reorganizaciones.
-* *Aleatorias:* escribimos o modificamos datos en distintas posiciones. Esto puede obligar a SMR a reorganizar información de varias zonas, haciendo que tarde más.
+    - *Secuenciales:* los datos se escriben siguiendo un orden. Esto facilita que SMR vaya colocando la información de forma consecutiva, evitando muchas reorganizaciones.
+    - *Aleatorias:* escribimos o modificamos datos en distintas posiciones. Esto puede obligar a SMR a reorganizar información de varias zonas, haciendo que tarde más.
 
 ---
 
@@ -105,12 +105,12 @@ Aquí entran las escrituras *secuenciales* o *aleatorias*.
 Existen dos herramientas principales que sirven para valorar la capacidad de un disco para almacenar, leer y escribir datos correctamente sin sufrir averías.
 
 #### 6.1. MTBF (Mean Time Between Failures)
-- **Definición:** Estimación estadística de la fiabilidad de un dispositivo, que indica el tiempo medio entre averías y se expresa normalmente en horas. **No permite predecir cuando va a fallar un disco concreto**.
+- **Definición:** estimación estadística de la fiabilidad de un dispositivo, que indica el tiempo medio entre averías y se expresa normalmente en horas. **No permite predecir cuando va a fallar un disco concreto**.
 
 *Ejemplo:* un HDD tiene un MTBF de 1.000.000 de horas, no significa que cada disco vaya a durar ese tiempo, es una estimación estadística calculada para un conjunto de dispositivos. Algunos pueden fallar antes y otros funcionar durante mucho más tiempo.
 
 #### 6.2. SMART (Self-Monitoring, Analysis and Reporting Technology)
-- **Definición:** Tecnología que permite al propio disco duro supervisar determinados aspectos de su funcionamiento y registrar indicadores que pueden ayudar a detectar posibles fallos. **No garantiza que el disco avise antes de averiarse**.
+- **Definición:** tecnología que permite al propio disco duro supervisar determinados aspectos de su funcionamiento y registrar indicadores que pueden ayudar a detectar posibles fallos. **No garantiza que el disco avise antes de averiarse**.
 
 SMART registra diferentes indicadores como, la temperatura, los sectores reasignados (sectores dañados que se sustituyen por otros de reserva) y los errores de lectura y escritura. Estos datos ayudan a detectar posibles problemas y señales de deterioro del disco.
 
