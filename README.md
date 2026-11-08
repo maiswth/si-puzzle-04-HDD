@@ -1,10 +1,13 @@
 # Puzzle UT2 · Pieza 04: HDD
 Grupo: Maisara Aldana (@maiswth) · Morena Macias (@M0ren42)
 
-## 1. Qué es y qué función cumple
-Un **HDD** es un dispositivo de almacenamiento **no volátil:** conserva los datos sin corriente mediante platos magnéticos giratorios y cabezales. Es el **almacenamiento secundario** del sistema: guarda el sistema operativo, los archivos y las copias de seguridad, y entrega datos a la RAM cuando se necesitan.
+## 1. Qué es y qué función cumple en el sistema
+- **Definición:** Un disco duro es un dispositivo de almacenamiento **no volátil** que conserva los datos aunque el ordenador esté apagado. Utiliza platos magnéticos giratorios y cabezales para leer y escribir información.
 
-En la jerarquía de memoria cada nivel actúa como caché del inferior: cuanto más lejos de la CPU, más capacidad y latencia, y menos coste por byte.
+En el sistema es el **almacenamiento secundario**, guarda el sistema operativo, los archivos y las copias de seguridad, y entrega datos a la RAM cuando se necesitan.
+
+#### Jerarquía de memoria y E/S
+- **Definición:** es la forma en que se organizan los diferentes tipos de memoria de un ordenador según su velocidad, capacidad y coste. Las memorias más rápidas utilizan tecnologías más costosas y necesitan estar muy cerca del procesador. **Cada nivel es caché del inferior**.
 
 | Nivel | Latencia típica | Capacidad típica | Papel |
 |---|---|---|---|
@@ -13,25 +16,36 @@ En la jerarquía de memoria cada nivel actúa como caché del inferior: cuanto más 
 | SSD | ~0,1 ms | 0,5-4 TB | Permanente y rápido |
 | **HDD** | **5-15 ms** | **1-30+ TB** | Permanente y barato por TB |
 
-Los SSD ganan en latencia e IOPS, pero el HDD sigue vigente donde importa, el coste por TB: NAS, copias de seguridad, vídeo y centros de datos.
+#### Cuándo sigue compensando un HDD
+Aunque los SSD ofrecen menor IOPS, los HDD siguen siendo útiles para almacenar grandes cantidades de datos por su menor coste por TB. Su evolución busca aumentar la densidad de almacenamiento: **guardar más información en el mismo espacio**.
+- **Conclusión:** HDD cuando importa la capacidad por euro; SSD cuando importa la velocidad. Muchos equipos combinan ambos: SSD para el sistema y HDD para los datos.
 
 ## 2. Como funciona por dentro
 
 ![Figura1](img/figura1-interior-hdd.svg)
 
-##### *Figura1. Interior de un HDD de 3,5": el motor hace girar los platos y el brazo coloca el cabezal sobre la pista; la placa controladora gestiona el caché y la interfaz.*
+##### *Figura1. Interior de un HDD de 3,5": el motor hace girar los platos y el brazo coloca el cabezal sobre la pista; la placa controladora (PGB) gestiona el caché y la interfaz.*
 
-- **Platos:** discos con material magnético; los datos se organizan en **pistas** concéntricas divididas en **sectores** (512 B o 4 KiB). Se usan ambas caras.
-- **Cabezales:** escriben orientando magnéticamente pequeñas regiones y leen detectando sus variaciones. "Vuelan" a pocos nanómetros del plato sobre un colchón de aire.
-- **Brazo actuador:** coloca los cabezales sobre la pista deseada.
+- **Platos:** son los discos que guardan los datos mediante magnetismo, cubiertos de material magnético. En su superficie se organizan los datos en circunferencias concéntricas llamadas pistas (*tracks*), y cada pista se divide en **sectores** (512 B o 4 KiB), la unidad mínima de lectura y escritura. Pueden utilizarse ambas caras.
+- **Cabezales de lectura:** escriben modificando la orientación magnética de pequeñas regiones para representar los datos y leen detectando variaciones magnéticas.
+- **Brazo actuador:** desplaza los cabezales hasta la pista donde se encuentran los datos.
 - **Motor del eje (*spindle*):** hace girar los platos a velocidad constante.
--**Caché (DRAM, 64-512 MB):** guarda copias de lecturas recientes y agrupa escrituras para que el firmware las ordene antes de pasarlas al plato. Al ser volátil **no es almacenamiento**: se pierde sin corriente, y una caída puede perder escrituras pendientes.
+- **Placa controladora (PCB):** electrónica situada en la cara inferior del disco; ejecuta el firmware, controla el motor y el brazo, y se comunica con el equipo por la interfaz.
 
 ---
 
 ## 3. Características, unidades y cómo se miden
 
+#### Tiempo de acceso
+Es el tiempo necesario para localizar y leer datos.
+
 $$T_{\text{acceso}} = T_{\text{seek}} + T_{\text{rotacional}} + T_{\text{transferencia}}$$
+
+
+![Figura2](img/figura2-tiempo-acceso.svg)
+
+##### *Figura 2. Los tres componentes del tiempo de acceso. A 7.200 RPM la espera rotacional media es de 4,17 ms.*
+
 
 | Característica | Unidad | Valor típico | Qué significa y cómo se obtiene |
 |---|---|---|---|
@@ -42,17 +56,23 @@ $$T_{\text{acceso}} = T_{\text{seek}} + T_{\text{rotacional}} + T_{\text{transfe
 | IOPS aleatorios | ops/s | ~80-100 | ~ 1 / (seek + latencia). Un SSD supera las decenas de miles. |
 | Fiabilidad (MTBF) | horas | ~1.000.000 | Estimación estadística de una población. AFR ~ 8.760 / MTBF ~ 0,88 %/año. |
 
-**Ejemplo:** a 7.200 RPM con seek de 8 ms, un acceso aleatorio tarda ¿ 12 ms
+**Ejemplo:** a 7.200 RPM con seek de 8 ms, un acceso aleatorio tarda aprox. 12 ms
 (8 + 4,17), es decir, unos 80 IOPS. Por eso el HDD sufre con muchos archivos pequeños
-y rinde bien en secuencial.
+y rinde bien con archivos grandes y continuos.
 
-**RPM:** más RPM reduce la latencia rotacional, pero aumenta ruido, calor y consumo.
-**Acceso por bloques:** a diferencia de la RAM (direccionable por bytes), el disco
-lee y escribe siempre sectores completos.
+#### RPM (Revolutions Per Minute) 
+Indica cuántas vueltas completas realizan los platos de un disco duro en un minuto; las velocidades habituales con 5.400 y 7.200 RPM; a mayor RPM menor latencia rotacional, esto se traduce en + operaciones - tiempo pero aumentan el ruido, calor y el consumo de energía.
 
-![Figura2](img/figura2-tiempo-acceso.svg)
+#### Acceso por bloques
+La RAM permite acceder directamente a posiciones individuales de memoria direccionables por bytes. Sin embargo, los dispositivos de almacenamiento suelen trabajar mediantes bloques de datos: el disco lee y escribe siempre sectores completos.
 
-##### *Figura 2. Los tres componentes del tiempo de acceso. A 7.200 RPM la espera rotacional media es de 4,17 ms.*
+#### Memoria caché
+- **Definición:** es una pequeña memoria temporal integrada en el disco duro (normalmente DRAM). Su función es almacenar datos durante un tiempo para acelerar determinadas operaciones de lectura y escritura. 
+En la lectura guarda temporalmente los datos recién solicitados para poder entregarlos rápidamente si vuelven a pedirse, y en la escritura almacena los datos mientras el firmware los organiza y agrupa antes de registrarlos en los platos, reduciendo los tiempos de espera.
+
+#### MTBF (Mean Time Between Failures)
+- **Definición:** estimación estadística de la fiabilidad de un dispositivo, que indica el tiempo medio entre averías y se expresa normalmente en horas. No permite predecir cuándo va a fallar un disco concreto.
+
 
 ## 4. Tipos, evolución y estándares actuales
 **Tecnología de grabación**
@@ -71,14 +91,12 @@ lee y escribe siempre sectores completos.
 
 | | Uso típico | Notas |
 |---|---|---|
-| 3,5¿ | Sobremesa, NAS | Alimentación 5 V y 12 V |
-| 2,5¿ | Portátiles, externos | Normalmente 5 V (USB) |
+| 3,5" | Sobremesa, NAS | Alimentación 5 V y 12 V |
+| 2,5" | Portátiles, externos | Normalmente 5 V (USB) |
 | SATA (6 Gb/s) | Doméstico y NAS | Barato. Funciona en controladora SAS |
 | SAS (12 Gb/s*) | Servidores | Fiabilidad y alta disponibilidad. **No** funciona en SATA convencional |
 
-**Evolución:** IBM RAMAC (1956) ¿
-interfaz IDE/PATA ¿ SATA ¿ grabación perpendicular ¿ discos con helio ¿ SMR ¿ HAMR/MAMR
-(más de 30 TB). El objetivo constante: más densidad en el mismo espacio.
+Evolución: desde el IBM RAMAC (1956, ~ 5 MB) pasando por IDE/PATA, SATA, la grabación perpendicular, el helio y el SMR, hasta HAMR/MAMR (más de 30 TB). El objetivo es siempre el mismo: guardar más información en el mismo espacio.
 
 ## 5. Un modelo real: Seagate IronWolf 4 TB (ST4000VN006)
 
@@ -96,7 +114,7 @@ Es un HDD diseñado para sistemas NAS, adecuado para compartir archivos y realiza
 | Transferencia sostenida máxima: 202 MB/s | Máxima velocidad sostenida indicada por el fabricante; puede variar según las condiciones. | Adecuada para transferir archivos grandes y realizar copias de seguridad. |
 | Funcionamiento: 24/7 | Diseñado para trabajar de forma continua. | Adecuado para un NAS encendido todo el día. |
 
-Prioriza fiabilidad 24/7 y escrituras predecibles (CMR) frente a rendimiento máximo.*
+Este modelo prioriza el almacenamiento continuo y las copias de seguridad en un NAS, más que el máximo rendimiento.
 
 ## 6. Averías típicas y errores al elegirlo o instalarlo
 
@@ -109,13 +127,16 @@ Prioriza fiabilidad 24/7 y escrituras predecibles (CMR) frente a rendimiento máx
 | Disco nuevo sin preparar | No aparece en el sistema | Inicializar, particionar y formatear **el disco correcto** |
 | Mala elección | SMR en RAID/NAS; disco de sobremesa en uso 24/7; SAS en puerto SATA | Elegir CMR y modelo para NAS; comprobar compatibilidad |
 
-**SMART** permite al disco registrar indicadores (temperatura, sectores reasignados y
+#### SMART (Self-Monitoring, Analysis and Reporting Technology) 
+- **Definición:** tecnología que permite al disco registrar indicadores (temperatura, sectores reasignados y
 pendientes, errores de lectura) que ayudan a detectar deterioro, pero **no garantiza
-avisar antes de un fallo**. Igual que el MTBF, no predice cuándo fallará un disco concreto.
+avisar antes de un fallo**.
 
 ![Figura4](img/figura4-lectura-disco.png)
 
 ##### *Figura 4. Lectura SMART de un HDD Seagate de 2 TB en CrystalDiskInfo. ¿ Temperatura, ¿ sectores reasignados, ¿ sectores pendientes.* 
+
+Si los sectores reasignados o pendientes crecen, los prioritario es proteger los datos: hacer copia de seguridad si el disco todavía permite acceder a ellos y comprobar su estado antes de seguir utilizándolo.
 
 ## Fuentes
 1. Figura 4: [https://commons.wikimedia.org/wiki/File:20210304_17_01_38-CrystalDiskInfo_8.9.0_x64_cens.png].*
@@ -123,4 +144,4 @@ avisar antes de un fallo**. Igual que el MTBF, no predice cuándo fallará un disc
 3.
 
 ## Uso de IA
-Que preguntamos a Jarvis u otra IA y cómo comprobamos sus respuestas.
+Se a utilizado la IA para generar los archivos .pvg y reestructurar el documento para no repetir información  y está quede bien organizada y sin errores. (Claude y Perplexity)
