@@ -100,7 +100,7 @@ Evolución: desde el IBM RAMAC (1956, ~ 5 MB) pasando por IDE/PATA, SATA, la grab
 
 ## 5. Un modelo real: Seagate IronWolf 4 TB (ST4000VN006)
 
-Es un HDD diseñado para sistemas NAS, adecuado para compartir archivos y realizar copias de seguridad. (enlace a la ficha del fabricante)
+Es un HDD diseñado para sistemas NAS, adecuado para compartir archivos y realizar copias de seguridad. (https://www.seagate.com/files/www-content/datasheets/pdfs/ironwolf-18tb-DS1904-20-2111US-en_US.pdf) 
 
 
 | Dato de la ficha | Qué significa | ¿Es bueno? ¿Para qué uso? |
@@ -134,14 +134,18 @@ avisar antes de un fallo**.
 
 ![Figura4](img/figura4-lectura-disco.png)
 
-##### *Figura 4. Lectura SMART de un HDD Seagate de 2 TB en CrystalDiskInfo. ¿ Temperatura, ¿ sectores reasignados, ¿ sectores pendientes.* 
+##### *Figura 4. Lectura SMART de un HDD Seagate de 2 TB en CrystalDiskInfo. Fuente: Wikimedia Commons (2021). 1. Temperatura, 2. sectores reasignados, 3. sectores pendientes.* 
 
 Si los sectores reasignados o pendientes crecen, los prioritario es proteger los datos: hacer copia de seguridad si el disco todavía permite acceder a ellos y comprobar su estado antes de seguir utilizándolo.
 
 ## Fuentes
-1. Figura 4: [https://commons.wikimedia.org/wiki/File:20210304_17_01_38-CrystalDiskInfo_8.9.0_x64_cens.png].*
-2.
-3.
+
+- Seagate Technology. (2024). *IronWolf data sheet* [Ficha técnica]. https://www.seagate.com/files/www-content/datasheets/pdfs/ironwolf-18tb-DS1904-20-2111US-en_US.pdf
+- Seagate Technology. (s. f.). *IronWolf NAS hard drive: ST4000VN006* [Página de producto]. https://www.seagate.com/products/nas-drives/ironwolf-hard-drive/?sku=ST4000VN006
+- Seagate Technology. (s. f.). *HAMR technology* [Página técnica]. https://www.seagate.com/em/en/innovation/hamr/
+- Seagate Technology. (2017). *Technology paper: HAMR technology* [Documento técnico]. https://www.seagate.com/files/www-content/innovation/hamr/_shared/files/tp707-1-1712us-hamr.pdf
+- Wikimedia Commons. (2021, 4 de marzo). *20210304 17 01 38-CrystalDiskInfo 8.9.0 x64 cens.png* [Imagen]. https://commons.wikimedia.org/wiki/File:20210304_17_01_38-CrystalDiskInfo_8.9.0_x64_cens.png
+- Figura 4: [https://commons.wikimedia.org/wiki/File:20210304_17_01_38-CrystalDiskInfo_8.9.0_x64_cens.png].*
 
 ## Uso de IA
-Se a utilizado la IA para generar los archivos .pvg y reestructurar el documento para no repetir información  y está quede bien organizada y sin errores. (Claude y Perplexity)
+Se a utilizado la IA para generar los archivos .pvg y reestructurar el documento para no repetir información, cumpla con los requisitos establecidos y la info+ quede bien organizada y sin errores. (Claude y Perplexity)
