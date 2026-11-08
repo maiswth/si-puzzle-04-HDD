@@ -19,6 +19,8 @@ Los SSD ganan en latencia e IOPS, pero el HDD sigue vigente donde importa, el co
 
 ![Figura1](img/figura1-interior-hdd.svg)
 
+##### *Interior de un HDD de 3,5": el motor hace girar los platos y el brazo coloca el cabezal sobre la pista; la placa controladora gestiona el caché y la interfaz.*
+
 - **Platos:** discos con material magnético; los datos se organizan en **pistas** concéntricas divididas en **sectores** (512 B o 4 KiB). Se usan ambas caras.
 - **Cabezales:** escriben orientando magnéticamente pequeñas regiones y leen detectando sus variaciones. "Vuelan" a pocos nanómetros del plato sobre un colchón de aire.
 - **Brazo actuador:** coloca los cabezales sobre la pista deseada.
@@ -48,7 +50,9 @@ y rinde bien en secuencial.
 **Acceso por bloques:** a diferencia de la RAM (direccionable por bytes), el disco
 lee y escribe siempre sectores completos.
 
-![Figura2](img/tiempo-acceso.svg)
+![Figura2](img/figura2-tiempo-acceso.svg)
+
+##### *Figura 2. Los tres componentes del tiempo de acceso. A 7.200 RPM la espera rotacional media es de 4,17 ms.*
 
 ## 4. Tipos, evolución y estándares actuales
 **Tecnología de grabación**
@@ -60,7 +64,7 @@ lee y escribe siempre sectores completos.
 | Escritura | Constante y predecible | Lenta en aleatoria: reescribe pistas vecinas |
 | Uso recomendado | NAS, RAID, uso mixto | Copias y archivo (escritura secuencial) |
 
-![Figura3](img/cmr-smr.svg)
+![Figura3](img/figura3-cmr-smr.svg)
 
 **Factor de forma e interfaz** (son independientes: cualquier tamaño puede usar SATA o SAS)
 
