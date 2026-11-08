@@ -1,7 +1,7 @@
 # Puzzle UT2 · Pieza NN: Nombre de la pieza
 Grupo: Maisara Aldana (@maiswth) · Morena Macias (@M0ren42)
 
-### 1. ¿Qué es un HDD? vigencia y evolución
+## 1. ¿Qué es un HDD? vigencia y evolución
 
 - **Definición:** Un disco duro (HDD) es un dispositivo de almacenamiento no volátil que conserva los datos aunque el ordenador está apagado. Utiliza platos magnéticos giratorios y cabezales para leer y escribir información.
 
@@ -23,7 +23,7 @@ Aunque los SSD ofrecen menor latencia y más operaciones de entrada y salida por
 
 ---
 
-### 2. Componentes su funcionamiento y RPM
+## 2. Componentes su funcionamiento y RPM
 
 - **Los platos:** son los discos circulares, guardan los datos mediante magentisimo cubiertos de material magnético que encontramos dentro del HDD. En su superficie se organizan los datos en circunferencias concentricas llamas pistas (*traks*). Pueden utilizarse ambas caras.
 - **Cabezales de lectura y escritura:** son unos componentes diminutos que se encargan de leer y escribir los datos en los platos.
@@ -40,7 +40,7 @@ Indica cuantas vueltas completas realizan los platos de un disco duro en un minu
 
 ---
 
-### 3. Rendimiento y tiempo de acceso
+## 3. Rendimiento y tiempo de acceso
 
 El tiempo de acceso es el tiempo necesario para localizar y leer datos.
 
@@ -58,12 +58,12 @@ $$T_{\text{acceso}} = T_{\text{seek}} + T_{\text{rotacional}} + T_{\text{transfe
 | Latencia rotacional | milisegundos (ms) | 4,17 ms (s 7.200 RPM) | El tiempo que espera el cabezal hasta que el sector deseado para por debajo debido al giro. |
 | Tasa de transferencia | MB/s (Megabytes por segundo) | 150 a 250MB/s | La velocidad a la que se transmiten los datos una vez que el cabezal empieza a leerlos o escribirlos | 
 
-#### 3.1. Acceso por bloques
+### 3.1. Acceso por bloques
 La RAM permite acceder directamente a posiciones individuales de memoria direccionables por bytes. Sin embargo los dispositivos de almacenamiento, suelen trabajar mediante bloques de datos.
 
 ---
 
-### 4. Memoria caché
+## 4. Memoria caché
 
 - **Definición:** es una pequeña memoria temporal que está integrada en el disco duro, su función es almacenar datos durante un tiempo para facilitar y acelerar determinadas operaciones de lectura y escritura.
 
@@ -77,7 +77,7 @@ La caché del disco duro no es permanente porque es memoria volátil (normalment
 
 ---
 
-### 5. Tecnologías de grabación: CMR y SMR
+## 5. Tecnologías de grabación: CMR y SMR
 
 Son dos formas de organizar las pistas donde se almacenan los datos en los platos de un HDD. La diferencia está en su distribución y afecta al rendimiento de escritura.
 
@@ -93,46 +93,70 @@ Su rendimiento depende del tipo de escritura:
 
 ---
 
-### 6. Factores de forma y estándares de conexión
+## 6. Factores de forma y estándares de conexión
 
 Los discos duros también se clasifican según su tamaño físico (factor de forma) y según el tipo de conexión que utilizan para comunicarse con el ordenador.
 
-#### 6.1. Factor de forma
+### 6.1. Factor de forma
 El **factor de forma** indica el tamaño físico de la unidad de almacenamiento.
 - **Disco de 3,5 pulgadas:** se utilizan principalmente en sobremesas y NAS. Son más grandes y necesitan alimentación de 5V y 12V.
 - **Disco de 2,5 pulgadas:** son más compactos y habituales en portátiles y discos externos. Funcionan normalmente con 5V, por lo que los externos suelen alimentarse mediante USB.
 
-#### 6.2. Interfaces de conexión
+### 6.2. Interfaces de conexión
 La interfaz permite que el HDD se comunique con el equipo. Las principales son SATA, habitual en ordenadores domésticos y NAS por su bajo coste, y SAS, utilizada en servidores y entornos empresariales por sus funciones de fiabilidad y alta disponibilidad.
 
-#### 6.3 Compatibilidad
+### 6.3 Compatibilidad
 El tamaño y la conexión son características independientes: un HDD de 3,5 o 2,5 pulgadas puede utilizar SATA o SAS. Un disco SATA normalmente funciona con una controladora SAS, pero un disco SAS no funciona con un puerto SATA convencional.
 
 
 ---
-### 7. Un modelo real: ficha técnica interpretada
+## 7. Un modelo real: ficha técnica interpretada
 
-**Modelo:** Marca Modelo (enlace a la ficha del fabricante)
+**Modelo:** Seagate IronWolf de 4 TB (ST4000VN006). Es un HDD diseñado para sistemas NAS, adecuado para compartir archivos y realizar copias de seguridad. (enlace a la ficha del fabricante)
 
 | Dato de la ficha | Qué significa | ¿Es bueno? ¿Para qué uso? |
 |---|---|---|
+| Capacidad: 4 TB | Cantidad de información que puede almacenar. | Adecuada para documentos, vídeos y copias de seguridad. |
+| Formato: 3,5 pulgadas | Tamaño físico del disco. | Apropiado para NAS y sobremesas con una bahía compatible. |
+| Interfaz: SATA 6 Gb/s | Estándar de conexión y velocidad máxima del enlace, no de lectura del disco. | Permite conectarlo a equipos y NAS compatibles con SATA. |
+| Velocidad de giro: 5.400 RPM | Los platos dan 5.400 vueltas por minuto. | Adecuada para almacenamiento y copias de seguridad. |
+| Caché: 256 MB | Memoria temporal utilizada para gestionar datos. | Ayuda a gestionar las transferencias, pero no aumenta la capacidad permanente. |
+| Grabación: CMR | Las pistas se escriben sin solaparse. | Ofrece escrituras más predecibles, adecuadas para NAS y RAID. |
+| Transferencia sostenida máxima: 202 MB/s | Máxima velocidad sostenida indicada por el fabricante; puede variar según las condiciones. | Adecuada para transferir archivos grandes y realizar copias de seguridad. |
+| Funcionamiento: 24/7 | Diseñado para trabajar de forma continua. | Adecuado para un NAS encendido todo el día. |
 
----
+Este modelo prioriza el almacenamiento continuo y las copias de seguridad en un NAS, m�s que el máximo rendimiento.
 
-### 8. Averías típicas y errores al instalarla
+## 8. Averías típicas y errores al instalarla
+
+Los problemas de un HDD pueden deberse a una avería del propio disco o a una instalación incorrecta. Conviene distinguir ambas situaciones antes de sustituirlo.
+
+### 8.1. Averías típicas
+- **Fallos mecánicos:** los problemas en el motor o los cabezales pueden provocar que el disco no gire o produzca golpes y clics repetitivos anormales. Los sonidos suaves durante la lectura y escritura pueden ser normales.
+
+- **Errores de lectura y escritura:** pueden impedir acceder a archivos o guardar información. Una herramienta de diagnóstico, ayuda a comprobar el estado del disco.
+
+### 8.2. Errores al instalarlo
+- **Cables mal conectados o dañados:** pueden impedir que el equipo detecte el HDD. Hay que revisar tanto el cable de datos como el de alimentación, con el equipo apagado y desconectado.
+
+- **Configuración incorrecta:** si el disco no aparece, puede ser necesario activar el puerto SATA o comprobar su detección en la BIOS/UEFI.
+
+- **Falta de preparación del disco nuevo:** puede necesitar inicialización, particionado y formateo antes de utilizarse. Estas operaciones deben hacerse sobre el disco correcto y no sobre uno que contenga datos que se quieran conservar.
+
+### 8.3. Precaución principal
+Si aparecen síntomas de fallo, lo prioritario es proteger los datos: realizar una copia de seguridad si el disco todavía permite acceder a ellos y comprobar su estado antes de seguir utilizándolo.
 
 
-
-### 9. Fiabilidad: MTBF y SMART
+## 9. Fiabilidad: MTBF y SMART
 
 Existen dos herramientas principales que sirven para valorar la capacidad de un disco para almacenar, leer y escribir datos correctamente sin sufrir averías.
 
-#### 9.1. MTBF (Mean Time Between Failures)
+### 9.1. MTBF (Mean Time Between Failures)
 - **Definición:** estimación estadística de la fiabilidad de un dispositivo, que indica el tiempo medio entre averías y se expresa normalmente en horas. **No permite predecir cuando va a fallar un disco concreto**.
 
 *Ejemplo:* un HDD tiene un MTBF de 1.000.000 de horas, no significa que cada disco vaya a durar ese tiempo, es una estimación estadística calculada para un conjunto de dispositivos. Algunos pueden fallar antes y otros funcionar durante mucho más tiempo.
 
-#### 9.2. SMART (Self-Monitoring, Analysis and Reporting Technology)
+### 9.2. SMART (Self-Monitoring, Analysis and Reporting Technology)
 - **Definición:** tecnología que permite al propio disco duro supervisar determinados aspectos de su funcionamiento y registrar indicadores que pueden ayudar a detectar posibles fallos. **No garantiza que el disco avise antes de averiarse**.
 
 SMART registra diferentes indicadores como, la temperatura, los sectores reasignados (sectores dañados que se sustituyen por otros de reserva) y los errores de lectura y escritura. Estos datos ayudan a detectar posibles problemas y señales de deterioro del disco.
