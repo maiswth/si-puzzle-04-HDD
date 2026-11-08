@@ -1,15 +1,11 @@
 # Puzzle UT2 · Pieza NN: Nombre de la pieza
-Grupo: Maisara Aldana (@mai_thv) · Morena Macias (@usuario)
+Grupo: Maisara Aldana (@maiswth) · Morena Macias (@M0ren42)
 
 ### 1. ¿Qué es un HDD? vigencia y evolución
 
-- **Definición:** un disco duro (*Hard Disk Drive*, HDD) es un dispositivo de almacenamiento secundario **no volátil** que utiliza la grabación magnética sobre **platos giratorios** para almacenar y conservar datos de forma permanente. Un brazo con cabezales se encarga de leer y escribir la información. Permite guardar grandes cantidades de datos, como el sistema operativo, los programas y los archivos del usuario, incluso cuando el ordenador está apagado.
+- **Definición:** Un disco duro (HDD) es un dispositivo de almacenamiento no volátil que conserva los datos aunque el ordenador está apagado. Utiliza platos magnéticos giratorios y cabezales para leer y escribir información.
 
-#### ¿Por qué sigue vigente?
-Los SSD siguen ganando en latencia e IOPS, pero el HDD gana en **capacidad y coste por TB**, por lo que son adecuados para guardar grandes cantidades de información.
-
-#### Evolución de los HDD: como consiguieron almacenar cada vez más información
-El principal objetivo de su evolución ha sido **aumentar la densidad de almacenamiento**, es decir almacenar más información en la misma superficie física.
+Aunque los SSD ofrecen menor latencia y más operaciones de entrada y salida por segundo (IOPS), los HDD siguen siendo útiles para almacenar grandes cantidades de datos por su menor coste por terabyte. Su evolución busca aumentar la densidad de almacenamiento: guardar más información en el mismo espacio.
 
 #### Jerarquía de memoria y E/S
 - **Definición:** es la forma en que se organizan los diferentes tipos de memoria de un ordenador según su velocidad, capacidad y coste. Las memorias más rápidas utilizan tecnologías más costosas y necesitan estar muy cerca del procesador. **Cada nivel es caché del inferior**.
@@ -29,11 +25,10 @@ El principal objetivo de su evolución ha sido **aumentar la densidad de almacen
 
 ### 2. Componentes su funcionamiento y RPM
 
-- **Los platos:** son los discos circulares que encontramos dentro del HDD. Se encargan de almacenar los datos mediante magnetismo. Pueden utilizarse ambas caras.
+- **Los platos:** son los discos circulares, guardan los datos mediante magentisimo cubiertos de material magnético que encontramos dentro del HDD. En su superficie se organizan los datos en circunferencias concentricas llamas pistas (*traks*). Pueden utilizarse ambas caras.
 - **Cabezales de lectura y escritura:** son unos componentes diminutos que se encargan de leer y escribir los datos en los platos.
     - *Escritura:* el cabezal modifica la orientación magnética de pequeñas regiones del plato para representar los datos.
-    - *Lectura:* detecta las variaciones magnéticas de esas regiones. Se utilizan tecnologías como:
-        - **GMR:** permite detectar campos magnéticos mediante cambios en la resistencia eléctrica.
+    - *Lectura:* detecta las variaciones magnéticas de esas regiones.
 - **Brazo actuador:** desplaza los cabezales hasta la pista donde se encuentran los datos.
 - **Motor del eje (spindle):** hace girar los platos a una velocidad constante.
 
@@ -58,15 +53,12 @@ $$T_{\text{acceso}} = T_{\text{seek}} + T_{\text{rotacional}} + T_{\text{transfe
 #### Tabla resumen de características y unidades
 | Característica | Unidad | Valores típicos hoy | Qué significa |
 |---|---|---|---|
-| Velocidad de giro | RPM (revoluciones por minuto) | 5.400 y 7200 RPM | Número de vueltas completas que realizan los platos del disco por minuto. |
+| Velocidad de giro | RPM (revoluciones por minuto) | 5.400 y 7200 RPM | Número de vueltas completas que realizan los platos del disco por minuto. |   
 | Tiempo de busqueda (*Seek*) | Milisegundos (ms) | 8 a 12 ms | El tiempo que tarda el brazo actuador en desplazar el cabezal hasta la pista correspondiente. |
 | Latencia rotacional | milisegundos (ms) | 4,17 ms (s 7.200 RPM) | El tiempo que espera el cabezal hasta que el sector deseado para por debajo debido al giro. |
 | Tasa de transferencia | MB/s (Megabytes por segundo) | 150 a 250MB/s | La velocidad a la que se transmiten los datos una vez que el cabezal empieza a leerlos o escribirlos | 
 
-#### 3.1. Latencia
-Es el tiempo que transcurre desde que se solicita un dato hasta que comienza a estar disponible.
-
-#### 3.2. Acceso por bloques
+#### 3.1. Acceso por bloques
 La RAM permite acceder directamente a posiciones individuales de memoria direccionables por bytes. Sin embargo los dispositivos de almacenamiento, suelen trabajar mediante bloques de datos.
 
 ---
@@ -85,23 +77,19 @@ La caché del disco duro no es permanente porque es memoria volátil (normalment
 
 ---
 
-### 5. CMR frente a SMR
+### 5. Tecnologías de grabación: CMR y SMR
 
-Son dos formas distintas de organizar físicamente la información en los platos de un HDD. Y esa diferencia afecta a como se comporta el disco cuando escribimos datos.
-Los platos de un HDD son discos circulares recubiertos de material magnético. En su superficie se organizan los datos en circunferencias concéntricas llamadas pistas (*tracks*). La diferencia entre CMR y SMR radica en como se distribuyen las pistas.
+Son dos formas de organizar las pistas donde se almacenan los datos en los platos de un HDD. La diferencia está en su distribución y afecta al rendimiento de escritura.
 
-#### 5.1. CMR (Conventional Magnetic Recording)
-En CMR, las pistas se escriben **una al lado de la otra, sin solaparse**. Si quieres modificar los datos de la pista B, puedes hacerlo sin tener que modificar las pistas A y C.
-- **Ventaja:** escrituras constantes y predecibles.
+#### CMR (Conventional Magnetic Recording)
+Las pistas se escriben **una al lado de la otra, sin solaparse**. Esto permite modificar una pista sin afectar a las vecinas y ofrece un rendimiento de escritura constante y predecible.
 
-#### 5.2. SMR (Shingled Magnetic Recording)
-En SMR, las pistas se escriben **solapándose parcialmente**. De esta manera aprovechan mejor la superficie del plato y almacenan más información en el mismo espacio.
+#### SMR (Shingled Magnetic Recording)
+Las pistas se **solapan parcialmente** para almacenar más información en el mismo espacio. Sin embargo, modificar una pista puede obligar a guardar y reescribir datos de las pistas vecinas, ralentizando la escritura.
 
-- **Inconveniente:** modificar los datos puede requerir trabajo adicional porque unas pistas se solapan con otras. Si queremos modificar los datos de B, podríamos sobreescribir parte de C, pero no queremos perder los datos de C así que el disco tiene que guardar temporalmente los datos que necesita conservar, reescribir la información modificada, reorganizar y volver a escribir los datos afectados.
-
-Aquí entran las escrituras *secuenciales* o *aleatorias*.
-    - *Secuenciales:* los datos se escriben siguiendo un orden. Esto facilita que SMR vaya colocando la información de forma consecutiva, evitando muchas reorganizaciones.
-    - *Aleatorias:* escribimos o modificamos datos en distintas posiciones. Esto puede obligar a SMR a reorganizar información de varias zonas, haciendo que tarde más.
+Su rendimiento depende del tipo de escritura:
+    - **Secuencial:** los datos se escriben en orden, lo que reduce las reorganizaciones.
+    - **Aleatoria:** los datos se modifican en distintas posiciones, lo que puede exigir más reorganizaciones y aumentar el tiempo de escritura.
 
 ---
 
@@ -111,13 +99,14 @@ Los discos duros también se clasifican según su tamaño físico (factor de for
 
 #### 6.1. Factor de forma
 El **factor de forma** indica el tamaño físico de la unidad de almacenamiento.
-- **Disco de 3,5 pulgadas**
-Es el formato más grande y se utiliza sobre todo en ordenadores de sobremesa y sistemas NAS. Permite mayor capacidad de almacenamiento, pero necesita más espacio y requiere alimentación de 5 V y 12 V. Por eso, los discos externos de este tamaño suelen llevar un adaptador de corriente propio.
-- **Disco de 2,5 pulgadas**
-Es más pequeño y se usaba principalmente en portátiles y discos externos. Funciona normalmente con 5 V, por lo que puede alimentarse directamente desde un puerto USB. Aunque tiene menor capacidad, ha sido muy común en portátiles, aunque actualmente ha perdido protagonismo frente a los SSD M.2.
+- **Disco de 3,5 pulgadas:** se utilizan principalmente en sobremesas y NAS. Son más grandes y necesitan alimentación de 5V y 12V.
+- **Disco de 2,5 pulgadas:** son más compactos y habituales en portátiles y discos externos. Funcionan normalmente con 5V, por lo que los externos suelen alimentarse mediante USB.
 
 #### 6.2. Interfaces de conexión
+La interfaz permite que el HDD se comunique con el equipo. Las principales son SATA, habitual en ordenadores domésticos y NAS por su bajo coste, y SAS, utilizada en servidores y entornos empresariales por sus funciones de fiabilidad y alta disponibilidad.
 
+#### 6.3 Compatibilidad
+El tamaño y la conexión son características independientes: un HDD de 3,5 o 2,5 pulgadas puede utilizar SATA o SAS. Un disco SATA normalmente funciona con una controladora SAS, pero un disco SAS no funciona con un puerto SATA convencional.
 
 
 ---
