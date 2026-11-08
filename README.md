@@ -1,118 +1,84 @@
 # Puzzle UT2 · Pieza 04: HDD
 Grupo: Maisara Aldana (@maiswth) · Morena Macias (@M0ren42)
 
-## 1. ¿Qué es un HDD? vigencia y evolución
+## 1. Qué es y qué función cumple
+Un **HDD** es un dispositivo de almacenamiento **no volátil:** conserva los datos sin corriente mediante platos magnéticos giratorios y cabezales. Es el **almacenamiento secundario** del sistema: guarda el sistema operativo, los archivos y las copias de seguridad, y entrega datos a la RAM cuando se necesitan.
 
-- **Definición:** Un disco duro (HDD) es un dispositivo de almacenamiento no volátil que conserva los datos aunque el ordenador está apagado. Utiliza platos magnéticos giratorios y cabezales para leer y escribir información.
+En la jerarquía de memoria cada nivel actúa como caché del inferior: cuanto más lejos de la CPU, más capacidad y latencia, y menos coste por byte.
 
-Aunque los SSD ofrecen menor latencia y más operaciones de entrada y salida por segundo (IOPS), los HDD siguen siendo útiles para almacenar grandes cantidades de datos por su menor coste por terabyte. Su evolución busca aumentar la densidad de almacenamiento: guardar más información en el mismo espacio.
+| Nivel | Latencia típica | Capacidad típica | Papel |
+|---|---|---|---|
+| Registros + caché L1-L3 | < 50 ns | KB-MB | Datos que usa la CPU ahora |
+| RAM | ~100 ns | GB | Programas y datos en uso |
+| SSD | ~0,1 ms | 0,5-4 TB | Permanente y rápido |
+| **HDD** | **5-15 ms** | **1-30+ TB** | Permanente y barato por TB |
 
-#### Jerarquía de memoria y E/S
-- **Definición:** es la forma en que se organizan los diferentes tipos de memoria de un ordenador según su velocidad, capacidad y coste. Las memorias más rápidas utilizan tecnologías más costosas y necesitan estar muy cerca del procesador. **Cada nivel es caché del inferior**.
+Los SSD ganan en latencia e IOPS, pero el HDD sigue vigente donde importa, el coste por TB: NAS, copias de seguridad, vídeo y centros de datos.
 
-#### ¿Cómo se organiza?
-| Nivel | Tipo de memoria | Función |
-|---|---|---|
-| 1 | Registros | Guardan datos que utiliza directamente la CPU |
-| 2 | Caché L1 | Almacena datos de acceso muy frecuente |
-| 3 | Caché L2 | Almacena más datos que L1 pero es algo más lenta |
-| 4 | Caché L3 | Caché de mayor capacidad, compartida normalmente entre núcleos |
-| 5 | RAM | Guarda programas y datos que se estan utilizando |
-| 6 | SSD | Almacenamiento permanente rápido |
-| 7 | HDD | Almacenamiento permanente de gran capacidad |
+## 2. Como funciona por dentro
 
----
+![Figura1](img/figura1-interior-hdd.svg)
 
-## 2. Componentes su funcionamiento y RPM
-
-- **Los platos:** son los discos circulares, guardan los datos mediante magnetismo cubiertos de material magnético que encontramos dentro del HDD. En su superficie se organizan los datos en circunferencias concéntricas llamas pistas (*traks*). Pueden utilizarse ambas caras.
-- **Cabezales de lectura y escritura:** son unos componentes diminutos que se encargan de leer y escribir los datos en los platos.
-    - *Escritura:* el cabezal modifica la orientación magnética de pequeñas regiones del plato para representar los datos.
-    - *Lectura:* detecta las variaciones magnéticas de esas regiones.
-- **Brazo actuador:** desplaza los cabezales hasta la pista donde se encuentran los datos.
-- **Motor del eje (spindle):** hace girar los platos a una velocidad constante.
-
-#### RPM (Revolutions Per Minute)
-Indica cuantas vueltas completas realizan los platos de un disco duro en un minuto, las velocidades habituales son 5400 y 7200RPM. A mayor RPM, menor latencia rotacional, quiere decir que cuanto más rápido giran los platos, menos tiempo tenemos que esperar a que el sector deseado pase por debajo del cabezal. 
-
-- **Ventajas:** al reducirse el tiempo de espera, generalmente se mejora el rendimiento (+ operaciones - tiempo). 
-- **Desventajas:** mayor RPM también significa que el motor tiene que girar los platos a mayor velocidad y eso produce ruido, calor y un mayor consumo de energía.
+- **Platos:** discos con material magnético; los datos se organizan en **pistas** concéntricas divididas en **sectores** (512 B o 4 KiB). Se usan ambas caras.
+- **Cabezales:** escriben orientando magnéticamente pequeñas regiones y leen detectando sus variaciones. "Vuelan" a pocos nanómetros del plato sobre un colchón de aire.
+- **Brazo actuador:** coloca los cabezales sobre la pista deseada.
+- **Motor del eje (*spindle*):** hace girar los platos a velocidad constante.
+-**Caché (DRAM, 64-512 MB):** guarda copias de lecturas recientes y agrupa escrituras para que el firmware las ordene antes de pasarlas al plato. Al ser volátil **no es almacenamiento**: se pierde sin corriente, y una caída puede perder escrituras pendientes.
 
 ---
 
-## 3. Rendimiento y tiempo de acceso
-
-El tiempo de acceso es el tiempo necesario para localizar y leer datos.
+## 3. Características, unidades y cómo se miden
 
 $$T_{\text{acceso}} = T_{\text{seek}} + T_{\text{rotacional}} + T_{\text{transferencia}}$$
 
-- *Seek:* tiempo que tarda el cabezal en desplazarse hasta la pista correspondiente.
-- *Latencia rotacional:* tiempo que espera hasta que el sector deseado pasa por debajo del cabezal.
-- *Transferencia:* tiempo necesario para transmitir los datos.
-
-#### Tabla resumen de características y unidades
-| Característica | Unidad | Valores típicos hoy | Qué significa |
+| Característica | Unidad | Valor típico | Qué significa y cómo se obtiene |
 |---|---|---|---|
-| Velocidad de giro | RPM (revoluciones por minuto) | 5.400 y 7200 RPM | Número de vueltas completas que realizan los platos del disco por minuto. |   
-| Tiempo de busqueda (*Seek*) | Milisegundos (ms) | 8 a 12 ms | El tiempo que tarda el brazo actuador en desplazar el cabezal hasta la pista correspondiente. |
-| Latencia rotacional | milisegundos (ms) | 4,17 ms (s 7.200 RPM) | El tiempo que espera el cabezal hasta que el sector deseado para por debajo debido al giro. |
-| Tasa de transferencia | MB/s (Megabytes por segundo) | 150 a 250MB/s | La velocidad a la que se transmiten los datos una vez que el cabezal empieza a leerlos o escribirlos | 
+| Velocidad de giro | RPM | 5.400 / 7.200 | Vueltas por minuto. Ficha técnica. |
+| Tiempo de búsqueda (*seek*) | ms | 8-12 | Tiempo del brazo hasta la pista. Ficha técnica. |
+| Latencia rotacional | ms | 4,17 (7.200 RPM) | Media vuelta: `60.000 / RPM / 2`. A 5.400 RPM, 5,56 ms. |
+| Tasa de transferencia sostenida | MB/s | 150-250 | Velocidad en lectura continua (mayor en el exterior del plato). Benchmark (CrystalDiskMark, `fio`). |
+| IOPS aleatorios | ops/s | ~80-100 | ~ 1 / (seek + latencia). Un SSD supera las decenas de miles. |
+| Fiabilidad (MTBF) | horas | ~1.000.000 | Estimación estadística de una población. AFR ~ 8.760 / MTBF ~ 0,88 %/año. |
 
-### 3.1. Acceso por bloques
-La RAM permite acceder directamente a posiciones individuales de memoria direccionables por bytes. Sin embargo los dispositivos de almacenamiento, suelen trabajar mediante bloques de datos.
+**Ejemplo:** a 7.200 RPM con seek de 8 ms, un acceso aleatorio tarda ¿ 12 ms
+(8 + 4,17), es decir, unos 80 IOPS. Por eso el HDD sufre con muchos archivos pequeños
+y rinde bien en secuencial.
 
----
+**RPM:** más RPM reduce la latencia rotacional, pero aumenta ruido, calor y consumo.
+**Acceso por bloques:** a diferencia de la RAM (direccionable por bytes), el disco
+lee y escribe siempre sectores completos.
 
-## 4. Memoria caché
+![Figura2](img/tiempo-acceso.svg)
 
-- **Definición:** es una pequeña memoria temporal que está integrada en el disco duro, su función es almacenar datos durante un tiempo para facilitar y acelerar determinadas operaciones de lectura y escritura.
+## 4. Tipos, evolución y estándares actuales
+**Tecnología de grabación**
 
-#### ¿Como ayuda a mejorar el rendimiento?
+| | CMR | SMR |
+|---|---|---|
+| Pistas | Una junto a otra, sin solaparse | Solapadas parcialmente |
+| Densidad | Menor | Mayor |
+| Escritura | Constante y predecible | Lenta en aleatoria: reescribe pistas vecinas |
+| Uso recomendado | NAS, RAID, uso mixto | Copias y archivo (escritura secuencial) |
 
-- **Operaciones de lectura:** el HDD almacena una copia temporal de los datos en su caché para entregarlos directamente si se vuelven a solicitar, lo que ahorra tiempo y reduce accesos físicos. Como su capacidad es limitada, estos datos no se conservan indefinidamente.
-- **Operaciones de escritura:** el HDD almacena los datos temporalmente en su caché para que el firmware los organice y agrupe antes de guardarlos en los platos, lo que mejora el rendimiento y reduce los tiempos de espera.
+![Figura3](img/cmr-smr.svg)
 
-#### ¿Por qué no es almacenamiento permanente?
-La caché del disco duro no es permanente porque es memoria volátil (normalmente DRAM). A diferencia de los platos magnéticos, que guardan la información de forma definitiva incluso tras apagar el equipo, la caché solo mantiene los datos temporalmente mientras el disco funciona.
+**Factor de forma e interfaz** (son independientes: cualquier tamaño puede usar SATA o SAS)
 
----
+| | Uso típico | Notas |
+|---|---|---|
+| 3,5¿ | Sobremesa, NAS | Alimentación 5 V y 12 V |
+| 2,5¿ | Portátiles, externos | Normalmente 5 V (USB) |
+| SATA (6 Gb/s) | Doméstico y NAS | Barato. Funciona en controladora SAS |
+| SAS (12 Gb/s*) | Servidores | Fiabilidad y alta disponibilidad. **No** funciona en SATA convencional |
 
-## 5. Tecnologías de grabación: CMR y SMR
+**Evolución:** IBM RAMAC (1956) ¿
+interfaz IDE/PATA ¿ SATA ¿ grabación perpendicular ¿ discos con helio ¿ SMR ¿ HAMR/MAMR
+(más de 30 TB). El objetivo constante: más densidad en el mismo espacio.
 
-Son dos formas de organizar las pistas donde se almacenan los datos en los platos de un HDD. La diferencia está en su distribución y afecta al rendimiento de escritura.
+## 5. Un modelo real: Seagate IronWolf 4 TB (ST4000VN006)
 
-#### CMR (Conventional Magnetic Recording)
-Las pistas se escriben **una al lado de la otra, sin solaparse**. Esto permite modificar una pista sin afectar a las vecinas y ofrece un rendimiento de escritura constante y predecible.
+Es un HDD diseñado para sistemas NAS, adecuado para compartir archivos y realizar copias de seguridad. (enlace a la ficha del fabricante)
 
-#### SMR (Shingled Magnetic Recording)
-Las pistas se **solapan parcialmente** para almacenar más información en el mismo espacio. Sin embargo, modificar una pista puede obligar a guardar y reescribir datos de las pistas vecinas, ralentizando la escritura.
-
-Su rendimiento depende del tipo de escritura:
-    - **Secuencial:** los datos se escriben en orden, lo que reduce las reorganizaciones.
-    - **Aleatoria:** los datos se modifican en distintas posiciones, lo que puede exigir más reorganizaciones y aumentar el tiempo de escritura.
-
----
-
-## 6. Factores de forma y estándares de conexión
-
-Los discos duros también se clasifican según su tamaño físico (factor de forma) y según el tipo de conexión que utilizan para comunicarse con el ordenador.
-
-### 6.1. Factor de forma
-El **factor de forma** indica el tamaño físico de la unidad de almacenamiento.
-- **Disco de 3,5 pulgadas:** se utilizan principalmente en sobremesas y NAS. Son más grandes y necesitan alimentación de 5V y 12V.
-- **Disco de 2,5 pulgadas:** son más compactos y habituales en portátiles y discos externos. Funcionan normalmente con 5V, por lo que los externos suelen alimentarse mediante USB.
-
-### 6.2. Interfaces de conexión
-La interfaz permite que el HDD se comunique con el equipo. Las principales son SATA, habitual en ordenadores domésticos y NAS por su bajo coste, y SAS, utilizada en servidores y entornos empresariales por sus funciones de fiabilidad y alta disponibilidad.
-
-### 6.3 Compatibilidad
-El tamaño y la conexión son características independientes: un HDD de 3,5 o 2,5 pulgadas puede utilizar SATA o SAS. Un disco SATA normalmente funciona con una controladora SAS, pero un disco SAS no funciona con un puerto SATA convencional.
-
-
----
-## 7. Un modelo real: ficha técnica interpretada
-
-**Modelo:** Seagate IronWolf de 4 TB (ST4000VN006). Es un HDD diseñado para sistemas NAS, adecuado para compartir archivos y realizar copias de seguridad. (enlace a la ficha del fabricante)
 
 | Dato de la ficha | Qué significa | ¿Es bueno? ¿Para qué uso? |
 |---|---|---|
@@ -125,47 +91,24 @@ El tamaño y la conexión son características independientes: un HDD de 3,5 o 2,5 
 | Transferencia sostenida máxima: 202 MB/s | Máxima velocidad sostenida indicada por el fabricante; puede variar según las condiciones. | Adecuada para transferir archivos grandes y realizar copias de seguridad. |
 | Funcionamiento: 24/7 | Diseñado para trabajar de forma continua. | Adecuado para un NAS encendido todo el día. |
 
-Este modelo prioriza el almacenamiento continuo y las copias de seguridad en un NAS, m s que el máximo rendimiento.
+Prioriza fiabilidad 24/7 y escrituras predecibles (CMR) frente a rendimiento máximo.*
 
-## 8. Averías típicas y errores al instalarla
+## 6. Averías típicas y errores al elegirlo o instalarlo
 
-Los problemas de un HDD pueden deberse a una avería del propio disco o a una instalación incorrecta. Conviene distinguir ambas situaciones antes de sustituirlo.
+| Situación | Síntoma | Qué hacer |
+|---|---|---|
+| Fallo mecánico (motor/cabezales) | No gira, golpes o clics repetitivos* | Copia de seguridad inmediata si aún es accesible; no seguir usándolo |
+| Errores de lectura/escritura | Archivos inaccesibles, avisos SMART | Diagnóstico con 'smartctl' o CrystalDiskInfo |
+| Cables mal conectados | El equipo no detecta el disco | Revisar datos y alimentación con el equipo apagado y desconectado |
+| Puerto SATA desactivado | No aparece | Comprobar BIOS/UEFI |
+| Disco nuevo sin preparar | No aparece en el sistema | Inicializar, particionar y formatear **el disco correcto** |
+| Mala elección | SMR en RAID/NAS; disco de sobremesa en uso 24/7; SAS en puerto SATA | Elegir CMR y modelo para NAS; comprobar compatibilidad |
 
-### 8.1. Averías típicas
-- **Fallos mecánicos:** los problemas en el motor o los cabezales pueden provocar que el disco no gire o produzca golpes y clics repetitivos anormales. Los sonidos suaves durante la lectura y escritura pueden ser normales.
+**SMART** permite al disco registrar indicadores (temperatura, sectores reasignados y
+pendientes, errores de lectura) que ayudan a detectar deterioro, pero **no garantiza
+avisar antes de un fallo**. Igual que el MTBF, no predice cuándo fallará un disco concreto.
 
-- **Errores de lectura y escritura:** pueden impedir acceder a archivos o guardar información. Una herramienta de diagnostico,ayuda a comprobar el estado del disco.
-
-### 8.2. Errores al instalarlo
-- **Cables mal conectados o dañados:** pueden impedir que el equipo detecte el HDD. Hay que revisar tanto el cable de datos como el de alimentación, con el equipo apagado y desconectado.
-
-- **Configuración incorrecta:** si el disco no aparece, puede ser necesario activar el puerto SATA o comprobar su detección en la BIOS/UEFI.
-
-- **Falta de preparación del disco nuevo:** puede necesitar inicialización, particionado y formateo antes de utilizarse. Estas operaciones deben hacerse sobre el disco correcto y no sobre uno que contenga datos que se quieran conservar.
-
-### 8.3. Precaución principal
-Si aparecen síntomas de fallo, lo prioritario es proteger los datos: realizar una copia de seguridad si el disco todavía permite acceder a ellos y comprobar su estado antes de seguir utilizándolo.
-
-
-## 9. Fiabilidad: MTBF y SMART
-
-Existen dos herramientas principales que sirven para valorar la capacidad de un disco para almacenar, leer y escribir datos correctamente sin sufrir averías.
-
-### 9.1. MTBF (Mean Time Between Failures)
-- **Definición:** estimación estadística de la fiabilidad de un dispositivo, que indica el tiempo medio entre averías y se expresa normalmente en horas. **No permite predecir cuando va a fallar un disco concreto**.
-
-*Ejemplo:* un HDD tiene un MTBF de 1.000.000 de horas, no significa que cada disco vaya a durar ese tiempo, es una estimación estadística calculada para un conjunto de dispositivos. Algunos pueden fallar antes y otros funcionar durante mucho más tiempo.
-
-### 9.2. SMART (Self-Monitoring, Analysis and Reporting Technology)
-- **Definición:** tecnología que permite al propio disco duro supervisar determinados aspectos de su funcionamiento y registrar indicadores que pueden ayudar a detectar posibles fallos. **No garantiza que el disco avise antes de averiarse**.
-
-SMART registra diferentes indicadores como, la temperatura, los sectores reasignados (sectores dañados que se sustituyen por otros de reserva) y los errores de lectura y escritura. Estos datos ayudan a detectar posibles problemas y señales de deterioro del disco.
-
-
-
-![Esquema de funcionamiento](img/ejemplo-esquema.svg)
-
-<!-- Guardad vuestras imágenes en img/ y cambiad el nombre del archivo en la línea de arriba. -->
+![Figura4](img/smart.png)
 
 ## Fuentes
 1.
