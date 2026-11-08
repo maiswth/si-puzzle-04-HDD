@@ -19,7 +19,7 @@ Los SSD ganan en latencia e IOPS, pero el HDD sigue vigente donde importa, el co
 
 ![Figura1](img/figura1-interior-hdd.svg)
 
-##### *Interior de un HDD de 3,5": el motor hace girar los platos y el brazo coloca el cabezal sobre la pista; la placa controladora gestiona el caché y la interfaz.*
+##### *Figura1. Interior de un HDD de 3,5": el motor hace girar los platos y el brazo coloca el cabezal sobre la pista; la placa controladora gestiona el caché y la interfaz.*
 
 - **Platos:** discos con material magnético; los datos se organizan en **pistas** concéntricas divididas en **sectores** (512 B o 4 KiB). Se usan ambas caras.
 - **Cabezales:** escriben orientando magnéticamente pequeñas regiones y leen detectando sus variaciones. "Vuelan" a pocos nanómetros del plato sobre un colchón de aire.
@@ -65,6 +65,7 @@ lee y escribe siempre sectores completos.
 | Uso recomendado | NAS, RAID, uso mixto | Copias y archivo (escritura secuencial) |
 
 ![Figura3](img/figura3-cmr-smr.svg)
+##### *Figura3. CMR (pistas independientes) frente a SMR (pistas solapadas): mas densidad a costa de reescrituras.*
 
 **Factor de forma e interfaz** (son independientes: cualquier tamaño puede usar SATA o SAS)
 
@@ -112,10 +113,12 @@ Prioriza fiabilidad 24/7 y escrituras predecibles (CMR) frente a rendimiento máx
 pendientes, errores de lectura) que ayudan a detectar deterioro, pero **no garantiza
 avisar antes de un fallo**. Igual que el MTBF, no predice cuándo fallará un disco concreto.
 
-![Figura4](img/smart.png)
+![Figura4](img/figura4-lectura-disco.png)
+
+##### *Figura 4. Lectura SMART de un HDD Seagate de 2 TB en CrystalDiskInfo. ¿ Temperatura, ¿ sectores reasignados, ¿ sectores pendientes.* 
 
 ## Fuentes
-1.
+1. Figura 4: [https://commons.wikimedia.org/wiki/File:20210304_17_01_38-CrystalDiskInfo_8.9.0_x64_cens.png].*
 2.
 3.
 
